@@ -1,0 +1,118 @@
+import notifee, { EventType } from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+
+notifee.onBackgroundEvent(async ({ type, detail }) => {
+    const { notification, pressAction } = detail;
+    if (type === EventType.ACTION_PRESS && pressAction == "open") {
+        console.log("dd")
+        await notifee.cancelNotification(notification.id);
+    }
+    // if (type === EventType.ACTION_PRESS && pressAction.id === 'mark-as-read') {
+    //     console.log("press")
+    //     await notifee.cancelNotification(notification.id);
+    // }
+    console.log("EVENT NOTIFY BRACKGROUND")
+    console.log(type)
+    console.log(notification.id)
+    console.log(detail.pressAction)
+    // console.log(detail.notification.android.actions[0])
+});
+
+notifee.onForegroundEvent(async ({ type, detail }) => {
+    const { notification, pressAction } = detail;
+    // if(type === EventType.ACTION_PRESS && pressAction.id){
+
+    // }
+    console.log("EVENT NOTIFY FOREGROUND")
+    console.log(type)
+    console.log(detail.pressAction)
+    // console.log(detail.notification.android.actions)
+    // console.log(detail.pressAction)
+});
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Message handled in the background!', remoteMessage);
+    // Create a channel
+    const channelId = await notifee.createChannel({
+        id: 'import',
+        name: 'Import channels',
+    });
+
+    // Display a notification
+    await notifee.displayNotification({
+        title: remoteMessage.data.title,
+        subtitle: remoteMessage.data.subtitle,
+        body: remoteMessage.data.body,
+        android: {
+            channelId: channelId,
+            actions: [
+                {
+                    title: '<b>Ver</b> &#128065;&#65039;',
+                    pressAction: {
+                        id: 'open',
+                        mainComponent: "App",
+                    },
+                },
+            ],
+            // pressAction: {
+            //     id: 'default',
+            //     mainComponent: "App",
+            // }
+            // actions: [
+            //     {
+            //         title: '<b>Dance</b> &#128111;',
+            //         pressAction: { id: 'dance' },
+            //     },
+            //     {
+            //         title: '<p style="color: #f44336;"><b>Cry</b> &#128557;</p>',
+            //         pressAction: { id: 'cry' },
+            //     },
+            // ],
+        },
+    });
+});
+
+async componentDidMount() {
+    console.log("start")
+    try {
+        await messaging().registerDeviceForRemoteMessages();
+        const token = await messaging().getToken();
+
+        let result = await axios.post('http://34.125.167.67/token', {
+            token
+        });
+
+        console.log("bien");
+
+    } catch (error) {
+        console.log(error)
+        console.log(error.response)
+    }
+
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+        this.onDisplayNotification(remoteMessage);
+        console.log('A new FCM message arrived!', remoteMessage.data);
+    });
+}
+
+//other
+import notifee from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+
+async onDisplayNotification(remoteMessage) {
+    // Create a channel
+    const channelId = await notifee.createChannel({
+        id: 'default',
+        name: 'Default channels',
+    });
+
+    // Display a notification   
+    await notifee.displayNotification({
+        title: remoteMessage.data.title,
+        subtitle: remoteMessage.data.subtitle,
+        body: remoteMessage.data.body,
+        android: {
+            channelId: channelId
+        }
+    });
+}
