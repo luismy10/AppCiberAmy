@@ -7,14 +7,14 @@ const DOMINIO_HTTPS = "https://ciberamy.net.pe/";
 /** 
  * DOMINIO DEL SERVIDOR PRINCIPAL
  */
-const DOMINIO_PRU = "http://192.168.0.105:5000/";
+const DOMINIO_PRU = "http://192.168.101.76:5000/";
 
 /**
  * EXTECIÓN PARA USO EN PRODUCCIÓN
  */
 
 
-const DOMINIO = DOMINIO_HTTPS;
+const DOMINIO = DOMINIO_PRU;
 
 const SIGN_IN = DOMINIO + "api/usuario/app/login";
 const SIGN_UP = DOMINIO + "api/usuario/add";

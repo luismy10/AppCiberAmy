@@ -15,7 +15,7 @@ import {
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { signOut } from '../redux/actions';
-import SecureStorage from 'react-native-secure-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -99,6 +99,7 @@ class Home extends React.Component {
                 reached: false,
             })
         } catch (error) {
+            console.log(error.response.data);
             await this.setStateAsync({
                 reload: true,
                 message: 'Se produjo un error, intente nuevamente en un par de minutos.'

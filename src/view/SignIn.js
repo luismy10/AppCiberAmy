@@ -17,7 +17,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { signIn } from '../redux/actions';
 import messaging from '@react-native-firebase/messaging';
-import SecureStorage from 'react-native-secure-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Feather from 'react-native-vector-icons/Feather';
 import { images, COLORS, FONTS, SIZES, URL } from '../../constants';
 
@@ -51,7 +51,7 @@ const SignIn = (props) => {
                     }
                 });
 
-                await SecureStorage.setItem('user', JSON.stringify(result.data));
+                await AsyncStorage.setItem('user', JSON.stringify(result.data));
                 props.restore(JSON.stringify(result.data));
             } catch (error) {
                 setLoading(false);
@@ -129,6 +129,7 @@ const SignIn = (props) => {
                                     placeholderTextColor={COLORS.grayLight}
                                     autoCapitalize={"none"}
                                     selectionColor={"#3fa9ff"}
+                                    keyboardType={"email-address"}
                                     style={{ ...FONTS.h4, width: '100%', backgroundColor: 'transparent', color: '#2f4667', padding: 0 }}
                                     ref={refUsuario}
                                     value={usuario}

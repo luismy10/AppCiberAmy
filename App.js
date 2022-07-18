@@ -3,10 +3,9 @@ import notifee from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SecureStorage from 'react-native-secure-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import { restoreToken } from './src/redux/actions';
-import { images, COLORS, FONTS, SIZES } from './constants';
 import { sleep } from './src/tools/Tools';
 import { SplashScreen, SignIn, SignUp, Home, Perfil } from './src';
 
@@ -37,7 +36,7 @@ class App extends React.Component {
       });
       await this.setStateAsync({ unsubscribe: unsubscribe });
 
-      let userToken = await SecureStorage.getItem('user');
+      let userToken = await AsyncStorage.getItem('user');
       this.props.restore(userToken);
     } catch (e) {
       this.props.restore(null);

@@ -1,5 +1,5 @@
 import React from 'react';
-import SecureStorage from 'react-native-secure-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import notifee, { EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { AppRegistry } from 'react-native';
@@ -44,7 +44,7 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
     try {
-        let userToken = await SecureStorage.getItem('user');
+        let userToken = await AsyncStorage.getItem('user');
         if (userToken != null) {
             onDisplayNotification(remoteMessage);
         }

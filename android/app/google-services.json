@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "623131256857",
-    "project_id": "cosmic-bonfire-344821",
-    "storage_bucket": "cosmic-bonfire-344821.appspot.com"
+    "project_number": "510718522350",
+    "project_id": "notifications-nodejs-39179",
+    "storage_bucket": "notifications-nodejs-39179.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:623131256857:android:61f70afae725a471fea288",
+        "mobilesdk_app_id": "1:510718522350:android:d2426a9153dd94ea5714ff",
         "android_client_info": {
           "package_name": "net.pe.ciberamy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "623131256857-0lhnkfhvlrlmmm4qjvd5eqvq6k39d6nr.apps.googleusercontent.com",
+          "client_id": "510718522350-lpd081g44m4cisn52hkdi43m0cjccfv9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDPBlo3nK3-BIDP7yQDNtFql5yn_d0ybQ"
+          "current_key": "AIzaSyBL8L0kAp4cBMbvTwdnXzHE-2ZnEx2AkYM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "623131256857-0lhnkfhvlrlmmm4qjvd5eqvq6k39d6nr.apps.googleusercontent.com",
+              "client_id": "510718522350-lpd081g44m4cisn52hkdi43m0cjccfv9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
